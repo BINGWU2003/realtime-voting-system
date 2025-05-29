@@ -47,7 +47,7 @@ export async function sendCurrentPollData(controller: ReadableStreamDefaultContr
     }
 
     const message = `data: ${JSON.stringify(pollData)}\n\n`
-    controller.enqueue(message)
+    controller.enqueue(new TextEncoder().encode(message))
   } catch (error) {
     console.error('发送投票数据失败:', error)
   }
@@ -86,11 +86,12 @@ export async function broadcastPollUpdate() {
     }
 
     const message = `data: ${JSON.stringify(pollData)}\n\n`
+    const encodedMessage = new TextEncoder().encode(message)
 
     // 向所有客户端发送更新
     clients.forEach(controller => {
       try {
-        controller.enqueue(message)
+        controller.enqueue(encodedMessage)
       } catch {
         // 客户端连接已断开，从列表中移除
         clients.delete(controller)

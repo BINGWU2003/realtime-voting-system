@@ -80,8 +80,6 @@ npm install
 
 ```env
 DATABASE_URL="mysql://用户名:密码@主机:端口/数据库名"
-NEXTAUTH_SECRET="your-secret-key-here"
-NEXTAUTH_URL="http://localhost:3000"
 ```
 
 ### 5. 数据库设置

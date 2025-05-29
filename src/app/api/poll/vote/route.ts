@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { prisma } from '@/lib/db'
-import { broadcastPollUpdate } from '../../sse/poll/route'
+import { broadcastPollUpdate } from '@/lib/sse'
 
 export async function POST(request: NextRequest) {
   try {

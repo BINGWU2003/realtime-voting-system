@@ -18,7 +18,7 @@ export async function GET(request: NextRequest) {
       const keepAlive = setInterval(() => {
         try {
           controller.enqueue(': keepalive\n\n')
-        } catch (error) {
+        } catch {
           clearInterval(keepAlive)
           clients.delete(controller)
         }
@@ -30,7 +30,7 @@ export async function GET(request: NextRequest) {
         clients.delete(controller)
         try {
           controller.close()
-        } catch (error) {
+        } catch {
           // 连接已关闭
         }
       })
@@ -124,7 +124,7 @@ export async function broadcastPollUpdate() {
     clients.forEach(controller => {
       try {
         controller.enqueue(message)
-      } catch (error) {
+      } catch {
         // 客户端连接已断开，从列表中移除
         clients.delete(controller)
       }
